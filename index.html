@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio de Soufiane Manouach, étudiant en Master 2 Économie numérique à la recherche d'un stage de 6 mois en data analysis.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Soufiane Manouach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&display=swap">
+<style>
+/* Layout : site en 5 pages (vues par ancre), noir sur blanc, boutons « tampon » à ombre dure et pastilles tournantes */
+:root {
+  --bg: #ffffff;
+  --ink: #0b0b0b;
+  --muted: #5e5e5e;
+  --soft: #f1f1f1;
+  --line: #0b0b0b;
+  --display: "Unbounded", "Arial Black", Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0b0b; --ink: #f4f4f4; --muted: #a5a5a5; --soft: #1b1b1b; --line: #f4f4f4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0b0b; --ink: #f4f4f4; --muted: #a5a5a5; --soft: #1b1b1b; --line: #f4f4f4;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap {
+  max-width: 72rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.eyebrow { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+/* En-tête et navigation */
+header { border-bottom: 2px solid var(--line); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 1rem; }
+.logo {
+  display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%;
+  background: var(--ink); color: var(--bg); font: 800 .95rem/1 var(--display); text-decoration: none;
+}
+nav ul { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; margin: 0; padding: 0; }
+nav a {
+  display: block; padding: .55rem .9rem; border: 2px solid transparent; border-radius: 99px;
+  font: 600 .74rem/1 var(--display); text-transform: uppercase; letter-spacing: .04em; text-decoration: none;
+}
+nav a:hover { border-color: var(--line); }
+nav a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+
+/* Vues */
+.view { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem); }
+h1, h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.03em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.3rem, 8vw, 6rem); line-height: .98; }
+h2 { font-size: clamp(1.8rem, 5.2vw, 3.4rem); line-height: 1.02; }
+h1 em, h2 em { font-size: 1.12em; }
+h3 { font: 600 1.05rem/1.3 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.intro { max-width: 40rem; font-size: clamp(1.05rem, 2vw, 1.22rem); color: var(--muted); margin: 1.5rem 0 0; }
+.intro strong { color: var(--ink); font-weight: 600; }
+.page-head { display: grid; gap: 1.1rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+.page-head .intro { margin: 0; }
+
+/* Bouton tampon : ombre dure qui s'écrase au survol */
+.btn {
+  display: inline-flex; align-items: center; gap: .7rem; cursor: pointer;
+  padding: .95rem 1.3rem; border: 2px solid var(--line); border-radius: 0;
+  background: var(--bg); color: var(--ink); text-decoration: none;
+  font: 600 .78rem/1 var(--display); text-transform: uppercase; letter-spacing: .05em;
+  box-shadow: 5px 5px 0 var(--ink); transition: transform .15s, box-shadow .15s, background .15s, color .15s;
+}
+.btn .arr { display: inline-block; transition: transform .2s; }
+.btn:hover { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--ink); background: var(--ink); color: var(--bg); }
+.btn:hover .arr { transform: translateX(4px) rotate(-45deg); }
+.btn:active { transform: translate(5px, 5px) scale(.98); }
+.btn.solid { background: var(--ink); color: var(--bg); }
+.btn.solid:hover { background: var(--bg); color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 1.1rem 1.3rem; margin-top: 2.25rem; }
+
+/* Accueil */
+.badge {
+  display: inline-flex; align-items: center; gap: .55rem; width: fit-content; max-width: 100%;
+  padding: .5rem .85rem; border: 2px solid var(--line); border-radius: 99px; font: 600 .78rem/1.2 var(--body);
+}
+.badge::before { content: ""; flex: none; width: .55rem; height: .55rem; border-radius: 50%; background: var(--ink); animation: blink 1.6s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--line); margin-top: clamp(2.5rem, 6vw, 4rem); }
+.stats div { padding: 1.4rem 1.2rem; display: grid; gap: .5rem; align-content: start; }
+.stats div + div { border-left: 2px solid var(--line); }
+.stats b { font: 800 clamp(1.5rem, 3.6vw, 2.4rem)/1.05 var(--display); letter-spacing: -.03em; }
+.stats span:last-child { color: var(--muted); }
+
+/* Parcours */
+.timeline { list-style: none; margin: 0 0 0 .6rem; padding: 0; border-left: 2px solid var(--line); }
+.step { position: relative; padding: 0 0 2.4rem 2rem; }
+.step:last-child { padding-bottom: .5rem; }
+.step::before { content: ""; position: absolute; left: -.6rem; top: .1rem; width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 2px solid var(--line); background: var(--bg); }
+.step.now::before { background: var(--ink); }
+.step.next::before { border-style: dashed; }
+.step h3 { margin-top: .6rem; font-size: clamp(1.05rem, 2.4vw, 1.35rem); }
+.step p { margin: .5rem 0 0; max-width: 40rem; color: var(--muted); }
+.goals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.goal { border: 2px solid var(--line); padding: 1.4rem; display: grid; gap: .6rem; align-content: start; }
+.goal .n { font: italic 400 2.4rem/1 var(--serif); }
+.goal p { margin: 0; color: var(--muted); }
+.split { display: grid; gap: clamp(3rem, 7vw, 5rem); }
+
+/* Compétences */
+.skill-groups { display: grid; gap: 2.5rem; }
+.skill-group h3 { display: flex; align-items: baseline; gap: .8rem; padding-bottom: .9rem; border-bottom: 2px solid var(--line); font-size: 1.15rem; }
+.skill-group h3 span { font: italic 400 1.5rem/1 var(--serif); color: var(--muted); }
+.skills { list-style: none; margin: 0; padding: 0; }
+.skills li { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: .5rem 1.5rem; padding-block: .95rem; border-bottom: 1px solid var(--soft); align-items: center; }
+.skills .name { font-weight: 600; }
+.skills .used { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip {
+  font: 500 .74rem/1 var(--body); padding: .45rem .65rem; border: 1.5px solid var(--line); border-radius: 99px;
+  color: var(--ink); text-decoration: none; transition: background .15s, color .15s;
+}
+.chip:hover { background: var(--ink); color: var(--bg); }
+
+/* Projets */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.card {
+  display: grid; grid-template-rows: auto auto 1fr auto; gap: .9rem;
+  border: 2px solid var(--line); padding: 1.4rem 1.4rem 1.5rem; background: var(--bg);
+  transition: background .2s, color .2s;
+}
+.card .fig { font: 800 clamp(1.6rem, 3vw, 2.1rem)/1 var(--display); letter-spacing: -.03em; }
+.card .fig small { display: block; margin-top: .5rem; font: 400 .85rem/1.35 var(--body); letter-spacing: 0; color: var(--muted); }
+.card p { margin: 0; color: var(--muted); }
+.card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding-top: .5rem; }
+.card-foot h3 { font-size: 1rem; min-width: 0; }
+.card:hover { background: var(--ink); color: var(--bg); }
+.card:hover p, .card:hover .fig small, .card:hover .eyebrow { color: var(--bg); opacity: .75; }
+
+/* Pastille tournante « Voir le projet » */
+.spin {
+  position: relative; flex: none; display: grid; place-items: center; width: 5.6rem; height: 5.6rem;
+  border-radius: 50%; background: var(--ink); color: var(--bg); text-decoration: none; transition: transform .25s;
+}
+.spin svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 12s linear infinite; }
+.spin text { fill: currentColor; font: 600 8.6px var(--display); letter-spacing: 1.6px; text-transform: uppercase; }
+.spin .core { font: 400 1.6rem/1 var(--body); transition: transform .25s; }
+.spin:hover { transform: scale(1.08); }
+.spin:hover .core { transform: rotate(-45deg); }
+.card:hover .spin { background: var(--bg); color: var(--ink); }
+@keyframes turn { to { transform: rotate(360deg); } }
+
+/* Fiche projet */
+.back { display: inline-flex; align-items: center; gap: .5rem; font: 600 .78rem/1 var(--display); text-transform: uppercase; letter-spacing: .05em; text-decoration: none; margin-bottom: 2rem; }
+.back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.detail-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; padding-bottom: 2rem; border-bottom: 2px solid var(--line); }
+.detail-head .page-head { margin: 0; }
+.bigfig { text-align: right; display: grid; gap: .5rem; }
+.bigfig b { font: 800 clamp(2.1rem, 6vw, 3.8rem)/1 var(--display); letter-spacing: -.04em; }
+.bigfig span { color: var(--muted); }
+.detail-body { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: clamp(2rem, 5vw, 4rem); padding-top: 2.5rem; }
+.detail-body section { display: grid; gap: .8rem; }
+.detail-body section + section { margin-top: 2rem; }
+.detail-body p { margin: 0; max-width: 42rem; }
+.detail-body ul, .detail-body ol { margin: 0; padding-left: 1.3rem; display: grid; gap: .45rem; max-width: 42rem; }
+aside.meta { border: 2px solid var(--line); padding: 1.4rem; display: grid; gap: 1.6rem; align-content: start; height: fit-content; box-shadow: 8px 8px 0 var(--ink); }
+aside.meta dl { margin: 0; display: grid; gap: 1rem; }
+aside.meta dd { margin: .4rem 0 0; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tags span { font: 500 .74rem/1 var(--body); padding: .4rem .6rem; background: var(--soft); }
+.pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 2px solid var(--line); }
+.pager a { text-decoration: none; display: grid; gap: .4rem; }
+.pager a:last-child { text-align: right; margin-left: auto; }
+.pager a b { font: 600 1rem/1.25 var(--display); }
+.pager a:hover b { text-decoration: underline; text-underline-offset: 4px; }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; }
+.channel { border: 2px solid var(--line); padding: 1.5rem; display: grid; gap: .9rem; align-content: start; box-shadow: 8px 8px 0 var(--ink); }
+.channel .big { font: 800 1.5rem/1 var(--display); letter-spacing: -.02em; }
+.channel .val { font-weight: 500; overflow-wrap: anywhere; user-select: all; min-width: 0; }
+.channel p { margin: 0; color: var(--muted); }
+.channel .actions { margin-top: .5rem; }
+.channel .btn { padding: .8rem 1rem; font-size: .7rem; }
+.pitch { margin-top: clamp(3rem, 6vw, 4.5rem); border-top: 2px solid var(--line); padding-top: 2rem; display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 1.5rem 3rem; }
+.pitch ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .5rem; max-width: 40rem; }
+
+footer { border-top: 2px solid var(--line); }
+footer .wrap { padding-block: 1.4rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+footer a { text-decoration: none; }
+
+@media (max-width: 900px) {
+  .grid, .contact-grid, .goals { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .detail-body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 620px) {
+  .grid, .contact-grid, .goals, .stats { grid-template-columns: minmax(0, 1fr); }
+  .stats div + div { border-left: 0; border-top: 2px solid var(--line); }
+  .skills li { grid-template-columns: minmax(0, 1fr); }
+  .detail-head, .pitch { grid-template-columns: minmax(0, 1fr); }
+  .bigfig { text-align: left; }
+  nav a { padding: .5rem .6rem; font-size: .64rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spin svg, .badge::before { animation: none; }
+  .btn, .spin, .card, .spin .core { transition: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .view:not([hidden]) > .wrap { animation: rise .45s cubic-bezier(.2,.7,.2,1); }
+  @keyframes rise { from { transform: translateY(12px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="Accueil">SM</a>
+    <nav aria-label="Pages du site">
+      <ul>
+        <li><a href="#accueil" data-nav="accueil">Qui je suis</a></li>
+        <li><a href="#parcours" data-nav="parcours">Parcours</a></li>
+        <li><a href="#competences" data-nav="competences">Compétences</a></li>
+        <li><a href="#projets" data-nav="projets">Projets</a></li>
+        <li><a href="#contact" data-nav="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Qui je suis -->
+  <section class="view" data-view="accueil">
+    <div class="wrap">
+      <div class="page-head">
+        <span class="badge">Recherche un stage de 6 mois en data analysis</span>
+        <h1>Soufiane Manouach, <em>économiste</em> des données.</h1>
+      </div>
+      <p class="intro">Je suis étudiant en <strong>Master 2 Économie numérique à l'Université de Montpellier</strong>. J'aime partir d'une question économique concrète, aller chercher les données (enquêtes, catalogues, pages web), puis en tirer des chiffres clairs et des recommandations. Je travaille surtout avec R, Python et Stata.</p>
+      <div class="actions">
+        <a class="btn solid" href="#projets">Voir mes projets <span class="arr">→</span></a>
+        <a class="btn" href="#contact">Me contacter <span class="arr">→</span></a>
+      </div>
+      <div class="stats">
+        <div><span class="eyebrow">Projets publiés</span><b>6</b><span>économétrie, data, finance, web</span></div>
+        <div><span class="eyebrow">Outils d'analyse</span><b>R · Python · Stata</b><span>et SQL pour les bases de données</span></div>
+        <div><span class="eyebrow">Disponibilité</span><b>6 mois</b><span>stage de fin d'études</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parcours -->
+  <section class="view" data-view="parcours" hidden>
+    <div class="wrap split">
+      <div>
+        <div class="page-head">
+          <span class="eyebrow">Parcours académique</span>
+          <h2>D'où je viens, <em>où je vais.</em></h2>
+        </div>
+        <ol class="timeline">
+          <li class="step next">
+            <span class="eyebrow">Prochaine étape</span>
+            <h3>Stage de fin d'études en data analysis · 6 mois</h3>
+            <p>Mettre mes méthodes au service de données réelles d'entreprise, au sein d'une équipe data.</p>
+          </li>
+          <li class="step now">
+            <span class="eyebrow">En cours</span>
+            <h3>Master 2 Économie numérique · Université de Montpellier</h3>
+            <p>Économie des plateformes et recherche appliquée : étude sur l'intégration du commerce aux réseaux sociaux, analyse du catalogue Netflix.</p>
+          </li>
+          <li class="step">
+            <span class="eyebrow">Avant</span>
+            <h3>Master 1 Économie numérique · Université de Montpellier</h3>
+            <p>Étude économétrique sur l'aération des logements avec un modèle Logit en R, étude de choix d'investissement, projets web et web scraping.</p>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <div class="page-head">
+          <span class="eyebrow">Ce que je veux réaliser</span>
+          <h2>Pendant mon stage, <em>je veux :</em></h2>
+        </div>
+        <div class="goals">
+          <div class="goal"><span class="n">i.</span><h3>Analyser des données réelles</h3><p>Nettoyer, explorer et modéliser des données d'entreprise pour répondre à des questions métier.</p></div>
+          <div class="goal"><span class="n">ii.</span><h3>Construire des indicateurs</h3><p>Créer des mesures utiles au pilotage, comme l'indice HHI ou la VAN dans mes projets.</p></div>
+          <div class="goal"><span class="n">iii.</span><h3>Rendre les résultats lisibles</h3><p>Présenter les chiffres en graphiques, en notes et en recommandations pour les décideurs.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compétences -->
+  <section class="view" data-view="competences" hidden>
+    <div class="wrap">
+      <div class="page-head">
+        <span class="eyebrow">Compétences</span>
+        <h2>Ce que je sais faire, <em>et où je l'ai fait.</em></h2>
+        <p class="intro">Chaque compétence renvoie aux projets dans lesquels je l'ai utilisée.</p>
+      </div>
+      <div class="skill-groups" id="skills"></div>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section class="view" data-view="projets" hidden>
+    <div class="wrap">
+      <div class="page-head">
+        <span class="eyebrow">Projets · 6 études</span>
+        <h2>Mes projets, <em>en chiffres.</em></h2>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- Fiche d'un projet -->
+  <section class="view" data-view="projet" hidden>
+    <div class="wrap" id="detail"></div>
+  </section>
+
+  <!-- Contact -->
+  <section class="view" data-view="contact" hidden>
+    <div class="wrap">
+      <div class="page-head">
+        <span class="eyebrow">Contact</span>
+        <h2>Vous recrutez un <em>stagiaire data ?</em></h2>
+        <p class="intro">Écrivez-moi pour un stage de fin d'études de 6 mois en data analysis.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="channel">
+          <span class="eyebrow">E-mail</span>
+          <span class="big">Par mail</span>
+          <span class="val" id="mail">manouachsoufiane59@gmail.com</span>
+          <div class="actions">
+            <button class="btn solid" id="copy" type="button">Copier l'adresse</button>
+            <a class="btn" href="mailto:manouachsoufiane59@gmail.com?subject=Stage%20data%20analysis">Écrire <span class="arr">→</span></a>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="eyebrow">GitHub</span>
+          <span class="big">Mon code</span>
+          <span class="val">manouachsoufiane59-svg</span>
+          <div class="actions">
+            <a class="btn" href="https://github.com/manouachsoufiane59-svg" target="_blank" rel="noopener">Ouvrir GitHub <span class="arr">→</span></a>
+          </div>
+        </div>
+        <div class="channel" id="linkedin"></div>
+      </div>
+      <div class="pitch">
+        <span class="eyebrow">Ce que je vous apporte</span>
+        <ul>
+          <li>Une formation en économie numérique : plateformes, marchés, comportements.</li>
+          <li>De l'économétrie appliquée, de la conception d'enquête jusqu'à l'interprétation.</li>
+          <li>La collecte et le traitement de données avec Python, R, Stata et SQL.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="eyebrow">© 2026 Soufiane Manouach</span>
+    <a class="eyebrow" href="#contact">Me contacter →</a>
+  </div>
+</footer>
+
+<script>
+const LINKEDIN = "https://www.linkedin.com/in/soufiane-manouach/";
+const GH = "https://github.com/manouachsoufiane59-svg/";
+
+const PROJECTS = [
+  {
+    id: "aeration", cat: "Économétrie", title: "Déterminants de l'aération des logements",
+    fig: "AUC 0,955", figLabel: "93,3 % des ménages bien classés",
+    short: "Modèle Logit sur 193 ménages pour comprendre qui aère son logement chaque jour.",
+    context: "Étude économétrique réalisée en Master 1 à partir de l'enquête Habitat-Santé 2024. Elle porte sur les arbitrages des ménages entre qualité de l'air intérieur, sensibilité au froid, bruit et contraintes du logement.",
+    method: ["Nettoyage des données : valeurs manquantes et valeur hors échelle (200 observations, 193 retenues)", "Statistiques descriptives, comparaisons par groupes et corrélations", "Modèle Logit complet, puis modèle réduit", "Interprétation par odds ratios et effets marginaux", "Qualité d'ajustement et capacité de classification"],
+    results: ["52,8 % des ménages aèrent quotidiennement", "Connaître les COV est associé à plus d'aération (odds ratio de 8,2)", "Un enfant de moins de 10 ans au foyer : odds ratio de 6,9", "Chaque point de sensibilité au froid : odds ratio de 0,37", "Pseudo-R² de McFadden de 0,68"],
+    tools: ["R", "tidyverse", "ggplot2", "stargazer", "pROC", "margins"], team: "Avec Richard Larri", deliverable: "Script R et note opérationnelle (PDF)",
+    repo: "determinants-aeration-logements"
+  },
+  {
+    id: "netflix", cat: "Data analysis", title: "Analyse du catalogue Netflix",
+    fig: "Indice HHI", figLabel: "concentration de l'offre par pays",
+    short: "Évolution du catalogue et concentration des productions par pays.",
+    context: "Analyse du jeu de données Kaggle « Netflix Movies and TV Shows » avec un angle d'économie numérique : Netflix diversifie-t-il ses contenus vers des productions locales ?",
+    method: ["Nettoyage : valeurs manquantes, doublons, conversion des dates", "Exploration : films et séries, évolution annuelle, pays, genres, durées", "Part des 5 premiers pays producteurs", "Indice de Herfindahl-Hirschman (HHI) et son évolution dans le temps"],
+    questions: ["Comment le catalogue de films et de séries a-t-il évolué dans le temps ?", "L'offre est-elle concentrée sur quelques pays ?", "Netflix se tourne-t-il vers des productions locales ?"],
+    tools: ["Python", "pandas", "matplotlib", "Jupyter"], team: "Projet individuel", deliverable: "Notebook Jupyter et graphiques",
+    repo: "netflix-data-analysis"
+  },
+  {
+    id: "commerce", cat: "Recherche", title: "Commerce sur les réseaux sociaux",
+    fig: "212", figLabel: "répondants, dont 114 vendeurs actifs",
+    short: "TikTok Shop, Instagram, Marketplace : substitut ou complément de l'e-commerce ?",
+    context: "Projet de recherche sur l'intégration du commerce aux plateformes sociales (TikTok Shop, Instagram Shopping, Facebook Marketplace) et ses effets sur les vendeurs et les consommateurs.",
+    method: ["Analyse documentaire et panorama du marché mondial", "Enquête originale auprès de 212 répondants", "Analyse descriptive en trois axes : canaux de vente, barrières à l'entrée, comportements d'achat", "Régressions exploratoires sous Stata (en annexe)", "Cadre théorique : marchés bifaces et effets de réseau"],
+    results: ["Le commerce social complète et segmente l'e-commerce plus qu'il ne le remplace", "87,6 % des vendeurs en sont à leur première expérience entrepreneuriale", "93,5 % ont démarré avec moins de 500 € d'investissement", "La découverte de produits sur les réseaux est associée à des achats plus impulsifs"],
+    tools: ["Stata", "Questionnaire", "Économie des plateformes"], team: "Avec Larri Richard", deliverable: "Rapport de recherche (PDF)",
+    repo: "commerce-reseaux-sociaux"
+  },
+  {
+    id: "bornes", cat: "Investissement", title: "Bornes de recharge sur le campus",
+    fig: "9 300 €", figLabel: "investissement, rentabilisé en moins de 3 ans",
+    short: "Faisabilité économique de bornes de batteries portables sur le campus Richter.",
+    context: "Projet de choix d'investissement : les étudiants ne peuvent pas recharger facilement leur téléphone sur le campus. La solution étudiée : trois bornes de douze batteries portables, à la bibliothèque, à la cafétéria et au restaurant universitaire.",
+    method: ["Étude de marché par questionnaire", "Prévisions de recettes et de dépenses sur 5 ans", "Valeur actuelle nette (VAN) et taux de rentabilité interne (TRI)", "Délai de récupération de l'investissement", "Analyse des risques et des bénéfices sociaux"],
+    results: ["Investissement initial estimé à 9 300 €", "Tarif : 3 premières heures gratuites, puis 1,30 € de l'heure", "VAN positive selon les hypothèses retenues", "Délai de récupération inférieur à 3 ans"],
+    tools: ["VAN", "TRI", "Étude de marché"], team: "Avec Richard Larri", deliverable: "Deux dossiers d'étude (PDF)",
+    repo: "bornes-recharge-campus"
+  },
+  {
+    id: "laliga", cat: "Web scraping", title: "Classement de La Liga",
+    fig: "1 script", figLabel: "des données web à une page HTML",
+    short: "Récupération automatique du classement et génération d'une page web.",
+    context: "Script Python qui collecte le classement de La Liga sur le site mercato.fr et génère automatiquement une page HTML avec les équipes, leur position et leur logo.",
+    method: ["Requête HTTP vers la page de classement", "Analyse du tableau HTML avec BeautifulSoup", "Extraction de la position, du nom et du logo de chaque équipe", "Génération d'un fichier index.html mis en forme"],
+    results: ["Une page de classement produite sans saisie manuelle", "Limite identifiée : le script dépend de la structure du site source"],
+    tools: ["Python", "requests", "BeautifulSoup", "HTML", "CSS"], team: "Projet individuel", deliverable: "Script Python et page générée",
+    repo: "scraping-classement-laliga"
+  },
+  {
+    id: "gamezone", cat: "Web · base de données", title: "GameZone",
+    fig: "4", figLabel: "activités réservables en ligne",
+    short: "Prototype de réservation d'activités sportives et de loisirs en PHP et MySQL.",
+    context: "Prototype universitaire de site pour découvrir et réserver des activités : football en réalité virtuelle, golf, billard et tennis.",
+    method: ["Pages d'accueil et de détail pour chaque activité", "Création de compte, connexion et gestion de session", "Mots de passe enregistrés sous forme hachée", "Formulaire de réservation : activité, date et horaire", "Page de consultation des réservations"],
+    results: ["Un parcours complet de réservation, du compte jusqu'au récapitulatif", "Une base MySQL interrogée avec PDO et MySQLi"],
+    tools: ["PHP", "MySQL", "PDO", "HTML", "CSS"], team: "Projet universitaire", deliverable: "Code source du site",
+    repo: "gamezone-reservation-php-mysql"
+  }
+];
+
+const SKILLS = [
+  { group: "Analyse & économétrie", n: "i.", items: [
+    ["Régression Logit, odds ratios, effets marginaux", ["aeration"]],
+    ["Évaluation de modèle (AUC, pseudo-R²)", ["aeration"]],
+    ["Indicateurs de concentration (HHI)", ["netflix"]],
+    ["Choix d'investissement (VAN, TRI)", ["bornes"]],
+    ["Conception et analyse d'enquêtes", ["commerce", "bornes"]]
+  ]},
+  { group: "Langages & logiciels", n: "ii.", items: [
+    ["R (tidyverse, ggplot2)", ["aeration"]],
+    ["Python (pandas, matplotlib)", ["netflix", "laliga"]],
+    ["Stata", ["commerce"]],
+    ["SQL (MySQL)", ["gamezone"]]
+  ]},
+  { group: "Données & outils", n: "iii.", items: [
+    ["Web scraping (requests, BeautifulSoup)", ["laliga"]],
+    ["Jupyter Notebook", ["netflix"]],
+    ["HTML, CSS, PHP", ["gamezone", "laliga"]],
+    ["Git et GitHub", ["aeration", "netflix", "commerce", "bornes", "laliga", "gamezone"]]
+  ]}
+];
+
+const byId = Object.fromEntries(PROJECTS.map(p => [p.id, p]));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function spin(href, label, n) {
+  return `<a class="spin" href="${href}" aria-label="${esc(label)}">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><defs><path id="c${n}" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+    <text><textPath href="#c${n}">Voir le projet • Voir le projet • </textPath></text></svg>
+    <span class="core" aria-hidden="true">↗</span></a>`;
+}
+
+document.getElementById("grid").innerHTML = PROJECTS.map((p, n) => `
+  <article class="card">
+    <span class="eyebrow">${esc(p.cat)}</span>
+    <div class="fig">${esc(p.fig)}<small>${esc(p.figLabel)}</small></div>
+    <p>${esc(p.short)}</p>
+    <div class="card-foot"><h3>${esc(p.title)}</h3>${spin("#projet-" + p.id, "Voir le projet " + p.title, n)}</div>
+  </article>`).join("");
+
+document.getElementById("skills").innerHTML = SKILLS.map(g => `
+  <div class="skill-group">
+    <h3><span>${g.n}</span>${esc(g.group)}</h3>
+    <ul class="skills">${g.items.map(([name, ids]) => `
+      <li><span class="name">${esc(name)}</span>
+      <span class="used">${ids.map(id => `<a class="chip" href="#projet-${id}">${esc(byId[id].title)}</a>`).join("")}</span></li>`).join("")}
+    </ul>
+  </div>`).join("");
+
+document.getElementById("linkedin").innerHTML = LINKEDIN
+  ? `<span class="eyebrow">LinkedIn</span><span class="big">Mon profil</span><p>Parcours détaillé et recommandations.</p>
+     <div class="actions"><a class="btn" href="${esc(LINKEDIN)}" target="_blank" rel="noopener">Ouvrir LinkedIn <span class="arr">→</span></a></div>`
+  : `<span class="eyebrow">LinkedIn</span><span class="big">Mon profil</span><p>Lien bientôt disponible. En attendant, contactez-moi par mail.</p>`;
+
+function renderDetail(p) {
+  const i = PROJECTS.indexOf(p);
+  const prev = PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length];
+  const next = PROJECTS[(i + 1) % PROJECTS.length];
+  const list = (arr, tag = "ul") => `<${tag}>${arr.map(x => `<li>${esc(x)}</li>`).join("")}</${tag}>`;
+  document.getElementById("detail").innerHTML = `
+    <a class="back" href="#projets">← Tous les projets</a>
+    <div class="detail-head">
+      <div class="page-head"><span class="eyebrow">${esc(p.cat)} · projet ${i + 1} sur ${PROJECTS.length}</span><h2>${esc(p.title)}</h2></div>
+      <div class="bigfig"><b>${esc(p.fig)}</b><span>${esc(p.figLabel)}</span></div>
+    </div>
+    <div class="detail-body">
+      <div>
+        <section><span class="eyebrow">Contexte</span><p>${esc(p.context)}</p></section>
+        <section><span class="eyebrow">Méthode</span>${list(p.method, "ol")}</section>
+        ${p.results ? `<section><span class="eyebrow">Résultats</span>${list(p.results)}</section>`
+                    : `<section><span class="eyebrow">Questions étudiées</span>${list(p.questions)}</section>`}
+      </div>
+      <aside class="meta">
+        <dl>
+          <div><dt class="eyebrow">Équipe</dt><dd>${esc(p.team)}</dd></div>
+          <div><dt class="eyebrow">Livrable</dt><dd>${esc(p.deliverable)}</dd></div>
+          <div><dt class="eyebrow">Outils</dt><dd class="tags">${p.tools.map(t => `<span>${esc(t)}</span>`).join("")}</dd></div>
+        </dl>
+        <a class="btn solid" href="${GH + p.repo}" target="_blank" rel="noopener">Voir sur GitHub <span class="arr">→</span></a>
+      </aside>
+    </div>
+    <div class="pager">
+      <a href="#projet-${prev.id}"><span class="eyebrow">← Précédent</span><b>${esc(prev.title)}</b></a>
+      <a href="#projet-${next.id}"><span class="eyebrow">Suivant →</span><b>${esc(next.title)}</b></a>
+    </div>`;
+}
+
+const PAGES = ["accueil", "parcours", "competences", "projets", "contact"];
+function route() {
+  const h = location.hash.slice(1);
+  let view = PAGES.includes(h) ? h : "accueil", nav = view;
+  if (h.startsWith("projet-") && byId[h.slice(7)]) { renderDetail(byId[h.slice(7)]); view = "projet"; nav = "projets"; }
+  document.querySelectorAll(".view").forEach(v => v.hidden = v.dataset.view !== view);
+  document.querySelectorAll("[data-nav]").forEach(a => a.dataset.nav === nav ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  window.scrollTo(0, 0);
+}
+addEventListener("hashchange", route);
+route();
+
+const btn = document.getElementById("copy"), mail = document.getElementById("mail");
+btn.addEventListener("click", () => {
+  const done = () => { btn.textContent = "Adresse copiée"; setTimeout(() => btn.textContent = "Copier l'adresse", 2000); };
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents(mail);
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent = "Sélectionnée : Cmd+C";
+  };
+  try { navigator.clipboard.writeText(mail.textContent).then(done, fallback); } catch (e) { fallback(); }
+});
+</script>
+</body>
+</html>
