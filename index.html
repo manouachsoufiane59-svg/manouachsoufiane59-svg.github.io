@@ -184,6 +184,10 @@ aside.meta dl { margin: 0; display: grid; gap: 1rem; }
 aside.meta dd { margin: .4rem 0 0; }
 .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
 .tags span { font: 500 .74rem/1 var(--body); padding: .4rem .6rem; background: var(--soft); }
+.detail-body .lead { font-size: 1.15rem; }
+.glossary dl { margin: 0; display: grid; gap: .8rem; max-width: 42rem; border-left: 2px solid var(--line); padding-left: 1.1rem; }
+.glossary dt { font: 600 .9rem/1.3 var(--display); }
+.glossary dd { margin: .2rem 0 0; color: var(--muted); }
 .pager { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 2px solid var(--line); }
 .pager a { text-decoration: none; display: grid; gap: .4rem; }
 .pager a:last-child { text-align: right; margin-left: auto; }
@@ -322,7 +326,8 @@ footer a { text-decoration: none; }
     <div class="wrap">
       <div class="page-head">
         <span class="eyebrow">Projets · 6 études</span>
-        <h2>Mes projets, <em>en chiffres.</em></h2>
+        <h2>Mes projets, <em>expliqués simplement.</em></h2>
+        <p class="intro">Pas besoin d'être spécialiste : chaque projet part d'une question de tous les jours. Cliquez sur une pastille pour voir ce que j'ai fait et ce que j'ai découvert.</p>
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -386,63 +391,69 @@ const GH = "https://github.com/manouachsoufiane59-svg/";
 
 const PROJECTS = [
   {
-    id: "aeration", cat: "Économétrie", title: "Déterminants de l'aération des logements",
-    fig: "AUC 0,955", figLabel: "93,3 % des ménages bien classés",
-    short: "Modèle Logit sur 193 ménages pour comprendre qui aère son logement chaque jour.",
-    context: "Étude économétrique réalisée en Master 1 à partir de l'enquête Habitat-Santé 2024. Elle porte sur les arbitrages des ménages entre qualité de l'air intérieur, sensibilité au froid, bruit et contraintes du logement.",
-    method: ["Nettoyage des données : valeurs manquantes et valeur hors échelle (200 observations, 193 retenues)", "Statistiques descriptives, comparaisons par groupes et corrélations", "Modèle Logit complet, puis modèle réduit", "Interprétation par odds ratios et effets marginaux", "Qualité d'ajustement et capacité de classification"],
-    results: ["52,8 % des ménages aèrent quotidiennement", "Connaître les COV est associé à plus d'aération (odds ratio de 8,2)", "Un enfant de moins de 10 ans au foyer : odds ratio de 6,9", "Chaque point de sensibilité au froid : odds ratio de 0,37", "Pseudo-R² de McFadden de 0,68"],
-    tools: ["R", "tidyverse", "ggplot2", "stargazer", "pROC", "margins"], team: "Avec Richard Larri", deliverable: "Script R et note opérationnelle (PDF)",
+    id: "aeration", cat: "Statistiques", title: "Pourquoi aère-t-on (ou pas) son logement ?",
+    fig: "93 sur 100", figLabel: "ménages pour lesquels mon modèle devine juste s'ils aèrent ou non",
+    short: "J'ai cherché ce qui pousse certaines familles à ouvrir leurs fenêtres tous les jours, et d'autres non.",
+    question: "Aérer son logement chaque jour est bon pour la santé, mais seulement un ménage sur deux le fait. Qu'est-ce qui fait la différence : les enfants, le froid, le bruit, le type de logement ?",
+    steps: ["J'ai utilisé les réponses de 193 ménages à une enquête sur l'habitat et la santé (2024).", "J'ai vérifié et corrigé les données : réponses manquantes ou impossibles.", "J'ai comparé les ménages qui aèrent tous les jours à ceux qui ne le font pas.", "J'ai construit un modèle statistique qui estime, pour chaque ménage, ses chances d'aérer.", "J'ai rédigé une note avec des conseils concrets pour encourager l'aération."],
+    found: ["Un peu plus de la moitié des ménages (53 %) aèrent tous les jours.", "Les familles qui connaissent les polluants de l'air intérieur aèrent beaucoup plus.", "Avoir un enfant de moins de 10 ans va aussi avec une aération plus fréquente.", "Les personnes sensibles au froid aèrent moins, et les habitants de maisons plus que ceux d'appartements.", "Le modèle devine juste dans 93 % des cas sur ces ménages."],
+    glossary: [["Modèle Logit", "un calcul qui estime la probabilité d'un oui ou d'un non (ici : aérer ou pas)"], ["AUC de 0,955", "la note de précision du modèle, sur une échelle où 1 est parfait"], ["COV", "des polluants invisibles présents dans l'air de la maison"]],
+    tools: ["R", "ggplot2"], team: "Avec Richard Larri", deliverable: "Programme d'analyse et note de conseils (PDF)",
     repo: "determinants-aeration-logements"
   },
   {
-    id: "netflix", cat: "Data analysis", title: "Analyse du catalogue Netflix",
-    fig: "Indice HHI", figLabel: "concentration de l'offre par pays",
-    short: "Évolution du catalogue et concentration des productions par pays.",
-    context: "Analyse du jeu de données Kaggle « Netflix Movies and TV Shows » avec un angle d'économie numérique : Netflix diversifie-t-il ses contenus vers des productions locales ?",
-    method: ["Nettoyage : valeurs manquantes, doublons, conversion des dates", "Exploration : films et séries, évolution annuelle, pays, genres, durées", "Part des 5 premiers pays producteurs", "Indice de Herfindahl-Hirschman (HHI) et son évolution dans le temps"],
-    questions: ["Comment le catalogue de films et de séries a-t-il évolué dans le temps ?", "L'offre est-elle concentrée sur quelques pays ?", "Netflix se tourne-t-il vers des productions locales ?"],
-    tools: ["Python", "pandas", "matplotlib", "Jupyter"], team: "Projet individuel", deliverable: "Notebook Jupyter et graphiques",
+    id: "netflix", cat: "Analyse de données", title: "Que regarde-t-on sur Netflix, et d'où ça vient ?",
+    fig: "Top 5", figLabel: "des pays qui produisent les films et séries de Netflix, suivi année après année",
+    short: "J'ai étudié tout le catalogue Netflix pour voir comment il a changé et quels pays le dominent.",
+    question: "Netflix propose des milliers de films et séries. Viennent-ils surtout de quelques pays, comme les États-Unis, ou Netflix s'ouvre-t-il aux productions du monde entier ?",
+    steps: ["J'ai récupéré la liste publique de tous les titres du catalogue (type, pays, année d'ajout, genre, durée).", "J'ai nettoyé le fichier : doublons, informations manquantes, dates mal écrites.", "J'ai compté les films et les séries, année par année, pays par pays et genre par genre.", "J'ai calculé la part des 5 pays qui produisent le plus.", "J'ai mesuré si l'offre se concentre ou se diversifie au fil du temps, et fait des graphiques."],
+    found: ["Une méthode complète et reproductible pour suivre l'évolution du catalogue.", "Des graphiques qui montrent les principaux pays producteurs et leur poids dans le temps."],
+    glossary: [["Indice HHI", "un score qui dit si un marché est dominé par quelques acteurs ou partagé entre beaucoup"], ["Python, pandas", "le langage et l'outil que j'utilise pour trier et compter les données"]],
+    tools: ["Python", "pandas", "matplotlib"], team: "Projet individuel", deliverable: "Analyse commentée et graphiques",
     repo: "netflix-data-analysis"
   },
   {
-    id: "commerce", cat: "Recherche", title: "Commerce sur les réseaux sociaux",
-    fig: "212", figLabel: "répondants, dont 114 vendeurs actifs",
-    short: "TikTok Shop, Instagram, Marketplace : substitut ou complément de l'e-commerce ?",
-    context: "Projet de recherche sur l'intégration du commerce aux plateformes sociales (TikTok Shop, Instagram Shopping, Facebook Marketplace) et ses effets sur les vendeurs et les consommateurs.",
-    method: ["Analyse documentaire et panorama du marché mondial", "Enquête originale auprès de 212 répondants", "Analyse descriptive en trois axes : canaux de vente, barrières à l'entrée, comportements d'achat", "Régressions exploratoires sous Stata (en annexe)", "Cadre théorique : marchés bifaces et effets de réseau"],
-    results: ["Le commerce social complète et segmente l'e-commerce plus qu'il ne le remplace", "87,6 % des vendeurs en sont à leur première expérience entrepreneuriale", "93,5 % ont démarré avec moins de 500 € d'investissement", "La découverte de produits sur les réseaux est associée à des achats plus impulsifs"],
-    tools: ["Stata", "Questionnaire", "Économie des plateformes"], team: "Avec Larri Richard", deliverable: "Rapport de recherche (PDF)",
+    id: "commerce", cat: "Enquête", title: "Acheter sur TikTok et Instagram, ça change quoi ?",
+    fig: "212", figLabel: "personnes interrogées, dont 114 qui vendent sur les réseaux sociaux",
+    short: "J'ai cherché si les achats sur les réseaux sociaux remplacent les sites de vente classiques ou s'y ajoutent.",
+    question: "On peut désormais acheter directement sur TikTok, Instagram ou Facebook. Est-ce que ça remplace les sites de vente en ligne habituels, ou est-ce un nouveau moyen d'acheter et de vendre en plus ?",
+    steps: ["J'ai lu les études existantes et rassemblé des chiffres sur ce marché dans le monde.", "J'ai créé un questionnaire et interrogé 212 personnes, acheteurs et vendeurs.", "J'ai analysé leurs réponses : pourquoi elles vendent, combien elles ont investi, comment elles achètent.", "J'ai testé quelques calculs statistiques supplémentaires, présentés avec prudence."],
+    found: ["Les réseaux sociaux s'ajoutent aux sites de vente classiques plus qu'ils ne les remplacent.", "Pour près de 9 vendeurs sur 10 interrogés, c'est leur toute première entreprise.", "Plus de 9 vendeurs sur 10 ont démarré avec moins de 500 €.", "Découvrir un produit sur les réseaux pousse plus souvent à acheter sur un coup de tête."],
+    glossary: [["Marché biface", "une plateforme qui relie deux groupes, ici les vendeurs et les acheteurs"], ["Stata", "un logiciel de calcul statistique"]],
+    tools: ["Questionnaire", "Stata"], team: "Avec Larri Richard", deliverable: "Rapport de recherche (PDF)",
     repo: "commerce-reseaux-sociaux"
   },
   {
-    id: "bornes", cat: "Investissement", title: "Bornes de recharge sur le campus",
-    fig: "9 300 €", figLabel: "investissement, rentabilisé en moins de 3 ans",
-    short: "Faisabilité économique de bornes de batteries portables sur le campus Richter.",
-    context: "Projet de choix d'investissement : les étudiants ne peuvent pas recharger facilement leur téléphone sur le campus. La solution étudiée : trois bornes de douze batteries portables, à la bibliothèque, à la cafétéria et au restaurant universitaire.",
-    method: ["Étude de marché par questionnaire", "Prévisions de recettes et de dépenses sur 5 ans", "Valeur actuelle nette (VAN) et taux de rentabilité interne (TRI)", "Délai de récupération de l'investissement", "Analyse des risques et des bénéfices sociaux"],
-    results: ["Investissement initial estimé à 9 300 €", "Tarif : 3 premières heures gratuites, puis 1,30 € de l'heure", "VAN positive selon les hypothèses retenues", "Délai de récupération inférieur à 3 ans"],
-    tools: ["VAN", "TRI", "Étude de marché"], team: "Avec Richard Larri", deliverable: "Deux dossiers d'étude (PDF)",
+    id: "bornes", cat: "Projet d'entreprise", title: "Des batteries à emprunter sur le campus",
+    fig: "Moins de 3 ans", figLabel: "pour rembourser les 9 300 € nécessaires au lancement",
+    short: "J'ai calculé si prêter des batteries de téléphone aux étudiants pouvait être un projet rentable.",
+    question: "Les étudiants n'ont souvent nulle part où recharger leur téléphone pendant la journée. Installer des bornes qui prêtent des batteries, comme des vélos en libre-service, est-ce une bonne idée sur le plan financier ?",
+    steps: ["J'ai interrogé des étudiants pour mesurer leur besoin et leur intérêt.", "J'ai imaginé 3 bornes de 12 batteries : à la bibliothèque, à la cafétéria et au restaurant universitaire.", "J'ai fixé un prix : 3 heures gratuites, puis 1,30 € de l'heure.", "J'ai estimé les recettes et les dépenses sur 5 ans.", "J'ai listé les risques : batteries perdues, demande trop faible, pannes."],
+    found: ["Le lancement coûterait environ 9 300 €.", "Avec ces hypothèses, le projet gagnerait plus d'argent qu'il n'en coûte.", "La somme de départ serait remboursée en moins de 3 ans."],
+    glossary: [["VAN", "ce que le projet rapporte au total, une fois toutes les dépenses déduites"], ["TRI", "le rendement du projet, comme le taux d'intérêt d'un placement"]],
+    tools: ["Questionnaire", "Calculs financiers"], team: "Avec Richard Larri", deliverable: "Deux dossiers d'étude (PDF)",
     repo: "bornes-recharge-campus"
   },
   {
-    id: "laliga", cat: "Web scraping", title: "Classement de La Liga",
-    fig: "1 script", figLabel: "des données web à une page HTML",
-    short: "Récupération automatique du classement et génération d'une page web.",
-    context: "Script Python qui collecte le classement de La Liga sur le site mercato.fr et génère automatiquement une page HTML avec les équipes, leur position et leur logo.",
-    method: ["Requête HTTP vers la page de classement", "Analyse du tableau HTML avec BeautifulSoup", "Extraction de la position, du nom et du logo de chaque équipe", "Génération d'un fichier index.html mis en forme"],
-    results: ["Une page de classement produite sans saisie manuelle", "Limite identifiée : le script dépend de la structure du site source"],
-    tools: ["Python", "requests", "BeautifulSoup", "HTML", "CSS"], team: "Projet individuel", deliverable: "Script Python et page générée",
+    id: "laliga", cat: "Automatisation", title: "Le classement du foot espagnol, récupéré tout seul",
+    fig: "0 copier-coller", figLabel: "le programme va chercher le classement et crée la page web",
+    short: "J'ai écrit un programme qui lit un site de foot et fabrique automatiquement une page avec le classement.",
+    question: "Recopier un classement à la main prend du temps et crée des erreurs. Peut-on demander à un programme d'aller lire le site et de tout mettre en forme à notre place ?",
+    steps: ["Le programme ouvre la page du classement sur le site mercato.fr.", "Il lit le tableau et repère, pour chaque équipe, sa place, son nom et son logo.", "Il crée une page web propre qui affiche le classement."],
+    found: ["Un classement à jour, sans aucune saisie manuelle.", "Une limite : si le site change sa mise en page, il faut adapter le programme."],
+    glossary: [["Web scraping", "faire lire un site web par un programme pour en extraire des informations"], ["BeautifulSoup", "un outil Python qui aide à lire le contenu d'une page web"]],
+    tools: ["Python", "HTML"], team: "Projet individuel", deliverable: "Programme et page générée",
     repo: "scraping-classement-laliga"
   },
   {
-    id: "gamezone", cat: "Web · base de données", title: "GameZone",
-    fig: "4", figLabel: "activités réservables en ligne",
-    short: "Prototype de réservation d'activités sportives et de loisirs en PHP et MySQL.",
-    context: "Prototype universitaire de site pour découvrir et réserver des activités : football en réalité virtuelle, golf, billard et tennis.",
-    method: ["Pages d'accueil et de détail pour chaque activité", "Création de compte, connexion et gestion de session", "Mots de passe enregistrés sous forme hachée", "Formulaire de réservation : activité, date et horaire", "Page de consultation des réservations"],
-    results: ["Un parcours complet de réservation, du compte jusqu'au récapitulatif", "Une base MySQL interrogée avec PDO et MySQLi"],
-    tools: ["PHP", "MySQL", "PDO", "HTML", "CSS"], team: "Projet universitaire", deliverable: "Code source du site",
+    id: "gamezone", cat: "Site web", title: "GameZone, réserver une activité en ligne",
+    fig: "4 activités", figLabel: "à réserver en ligne avec son propre compte",
+    short: "J'ai créé un site où l'on choisit une activité de loisir, une date et un horaire, puis on réserve.",
+    question: "Comment permettre à des clients de réserver une activité (foot en réalité virtuelle, golf, billard, tennis) sans passer par le téléphone ?",
+    steps: ["Une page d'accueil et une page de présentation pour chaque activité.", "La création d'un compte et la connexion, avec des mots de passe protégés.", "Un formulaire pour choisir l'activité, la date et l'heure.", "Une page qui récapitule les réservations de chaque client."],
+    found: ["Un parcours complet : de la création du compte jusqu'à la réservation confirmée.", "Toutes les réservations sont enregistrées et retrouvées automatiquement."],
+    glossary: [["Base de données", "un grand tableau organisé où le site range les comptes et les réservations"], ["PHP, MySQL", "les langages qui font fonctionner le site et sa base de données"]],
+    tools: ["PHP", "MySQL", "HTML", "CSS"], team: "Projet universitaire", deliverable: "Site prototype",
     repo: "gamezone-reservation-php-mysql"
   }
 ];
@@ -514,10 +525,11 @@ function renderDetail(p) {
     </div>
     <div class="detail-body">
       <div>
-        <section><span class="eyebrow">Contexte</span><p>${esc(p.context)}</p></section>
-        <section><span class="eyebrow">Méthode</span>${list(p.method, "ol")}</section>
-        ${p.results ? `<section><span class="eyebrow">Résultats</span>${list(p.results)}</section>`
-                    : `<section><span class="eyebrow">Questions étudiées</span>${list(p.questions)}</section>`}
+        <section><span class="eyebrow">La question de départ</span><p class="lead">${esc(p.question)}</p></section>
+        <section><span class="eyebrow">Ce que j'ai fait</span>${list(p.steps, "ol")}</section>
+        <section><span class="eyebrow">Ce que j'ai découvert</span>${list(p.found)}</section>
+        <section class="glossary"><span class="eyebrow">Les mots techniques, traduits</span>
+          <dl>${p.glossary.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl></section>
       </div>
       <aside class="meta">
         <dl>
