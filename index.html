@@ -129,8 +129,9 @@ h3 { font: 600 1.05rem/1.3 var(--display); letter-spacing: -.01em; margin: 0; te
 .skill-group h3 { display: flex; align-items: baseline; gap: .8rem; padding-bottom: .9rem; border-bottom: 2px solid var(--line); font-size: 1.15rem; }
 .skill-group h3 span { font: italic 400 1.5rem/1 var(--serif); color: var(--muted); }
 .skills { list-style: none; margin: 0; padding: 0; }
-.skills li { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: .5rem 1.5rem; padding-block: .95rem; border-bottom: 1px solid var(--soft); align-items: center; }
+.skills li { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: .6rem 2rem; padding-block: .95rem; border-bottom: 1px solid var(--soft); align-items: center; }
 .skills .name { font-weight: 600; }
+.skills .name small { display: block; margin-top: .25rem; font-size: .9rem; font-weight: 400; color: var(--muted); }
 .skills .used { display: flex; flex-wrap: wrap; gap: .4rem; }
 .chip {
   font: 500 .74rem/1 var(--body); padding: .45rem .65rem; border: 1.5px solid var(--line); border-radius: 99px;
@@ -315,7 +316,7 @@ footer a { text-decoration: none; }
       <div class="page-head">
         <span class="eyebrow">Compétences</span>
         <h2>Ce que je sais faire, <em>et où je l'ai fait.</em></h2>
-        <p class="intro">Chaque compétence renvoie aux projets dans lesquels je l'ai utilisée.</p>
+        <p class="intro">Chaque compétence est expliquée en une phrase, avec les projets où je l'ai mise en pratique.</p>
       </div>
       <div class="skill-groups" id="skills"></div>
     </div>
@@ -459,24 +460,24 @@ const PROJECTS = [
 ];
 
 const SKILLS = [
-  { group: "Analyse & économétrie", n: "i.", items: [
-    ["Régression Logit, odds ratios, effets marginaux", ["aeration"]],
-    ["Évaluation de modèle (AUC, pseudo-R²)", ["aeration"]],
-    ["Indicateurs de concentration (HHI)", ["netflix"]],
-    ["Choix d'investissement (VAN, TRI)", ["bornes"]],
-    ["Conception et analyse d'enquêtes", ["commerce", "bornes"]]
+  { group: "Comprendre les chiffres", n: "i.", items: [
+    ["Trouver ce qui explique un comportement", "Repérer, parmi plusieurs facteurs, ceux qui comptent vraiment (modèle Logit).", ["aeration"]],
+    ["Vérifier qu'une analyse est fiable", "Mesurer à quel point un modèle se trompe ou devine juste (AUC).", ["aeration"]],
+    ["Voir si un marché est dominé par quelques acteurs", "Calculer un score de concentration (indice HHI).", ["netflix"]],
+    ["Dire si un projet sera rentable", "Comparer ce qu'il coûte et ce qu'il rapporte sur plusieurs années (VAN, TRI).", ["bornes"]],
+    ["Mener une enquête", "Écrire un questionnaire, le diffuser et analyser les réponses.", ["commerce", "bornes"]]
   ]},
-  { group: "Langages & logiciels", n: "ii.", items: [
-    ["R (tidyverse, ggplot2)", ["aeration"]],
-    ["Python (pandas, matplotlib)", ["netflix", "laliga"]],
-    ["Stata", ["commerce"]],
-    ["SQL (MySQL)", ["gamezone"]]
+  { group: "Les logiciels que j'utilise", n: "ii.", items: [
+    ["R", "Un logiciel pour faire des statistiques et des graphiques.", ["aeration"]],
+    ["Python", "Un langage de programmation pour trier, compter et automatiser.", ["netflix", "laliga"]],
+    ["Stata", "Un logiciel de statistiques très utilisé en économie.", ["commerce"]],
+    ["SQL (MySQL)", "Le langage pour ranger et retrouver des informations dans une base de données.", ["gamezone"]]
   ]},
-  { group: "Données & outils", n: "iii.", items: [
-    ["Web scraping (requests, BeautifulSoup)", ["laliga"]],
-    ["Jupyter Notebook", ["netflix"]],
-    ["HTML, CSS, PHP", ["gamezone", "laliga"]],
-    ["Git et GitHub", ["aeration", "netflix", "commerce", "bornes", "laliga", "gamezone"]]
+  { group: "Récupérer et présenter les données", n: "iii.", items: [
+    ["Récupérer des données sur internet", "Faire lire un site par un programme pour en extraire les informations (web scraping).", ["laliga"]],
+    ["Présenter une analyse pas à pas", "Mélanger code, graphiques et explications dans un même document (Jupyter).", ["netflix"]],
+    ["Créer un site web", "Construire des pages et un site qui enregistre des réservations (HTML, CSS, PHP).", ["gamezone", "laliga"]],
+    ["Partager et sauvegarder mon travail", "Publier mes projets en ligne et garder l'historique des versions (Git, GitHub).", ["aeration", "netflix", "commerce", "bornes", "laliga", "gamezone"]]
   ]}
 ];
 
@@ -501,8 +502,8 @@ document.getElementById("grid").innerHTML = PROJECTS.map((p, n) => `
 document.getElementById("skills").innerHTML = SKILLS.map(g => `
   <div class="skill-group">
     <h3><span>${g.n}</span>${esc(g.group)}</h3>
-    <ul class="skills">${g.items.map(([name, ids]) => `
-      <li><span class="name">${esc(name)}</span>
+    <ul class="skills">${g.items.map(([name, plain, ids]) => `
+      <li><span class="name">${esc(name)}<small>${esc(plain)}</small></span>
       <span class="used">${ids.map(id => `<a class="chip" href="#projet-${id}">${esc(byId[id].title)}</a>`).join("")}</span></li>`).join("")}
     </ul>
   </div>`).join("");
