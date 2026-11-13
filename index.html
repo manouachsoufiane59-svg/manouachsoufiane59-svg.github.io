@@ -97,7 +97,7 @@ h3 { font: 600 1.05rem/1.3 var(--display); letter-spacing: -.01em; margin: 0; te
 /* Accueil : texte à gauche, portrait à droite (au-dessus sur téléphone) */
 .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 19rem); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 .portrait { position: relative; margin: 0 12px 12px 0; }
-.portrait img { display: block; width: 100%; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(1) contrast(1.06); border: 2px solid var(--line); box-shadow: 10px 10px 0 var(--ink); background: var(--soft); }
+.portrait img { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(1) contrast(1.06); border: 2px solid var(--line); box-shadow: 10px 10px 0 var(--ink); background: var(--soft); }
 .portrait figcaption {
   position: absolute; left: -1.4rem; bottom: -1.3rem; width: 6.2rem; height: 6.2rem; border-radius: 50%;
   display: grid; place-items: center; text-align: center; background: var(--ink); color: var(--bg);
