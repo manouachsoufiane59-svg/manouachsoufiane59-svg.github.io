@@ -130,8 +130,8 @@ h3 { font: 600 1.05rem/1.3 var(--display); letter-spacing: -.01em; margin: 0; te
 
 /* Compétences */
 .skill-groups { display: grid; gap: 2.5rem; }
-.skill-group h3 { display: flex; align-items: baseline; gap: .8rem; padding-bottom: .9rem; border-bottom: 2px solid var(--line); font-size: 1.15rem; }
-.skill-group h3 span { font: italic 400 1.5rem/1 var(--serif); color: var(--muted); }
+.skill-group h3 { display: flex; align-items: baseline; gap: 1rem; padding-bottom: .9rem; border-bottom: 2px solid var(--line); font-size: 1.15rem; }
+.skill-group h3 span { font: 800 clamp(2.4rem, 5vw, 3.4rem)/.9 var(--display); letter-spacing: -.04em; color: var(--ink); }
 .skills { list-style: none; margin: 0; padding: 0; }
 .skills li { display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: .6rem 2rem; padding-block: .95rem; border-bottom: 1px solid var(--soft); align-items: center; }
 .skills .name { font-weight: 600; }
@@ -476,20 +476,20 @@ const PROJECTS = [
 ];
 
 const SKILLS = [
-  { group: "Comprendre les chiffres", n: "i.", items: [
+  { group: "Comprendre les chiffres", n: "1", items: [
     ["Trouver ce qui explique un comportement", "Repérer, parmi plusieurs facteurs, ceux qui comptent vraiment (modèle Logit).", ["aeration"]],
     ["Vérifier qu'une analyse est fiable", "Mesurer à quel point un modèle se trompe ou devine juste (AUC).", ["aeration"]],
     ["Voir si un marché est dominé par quelques acteurs", "Calculer un score de concentration (indice HHI).", ["netflix"]],
     ["Dire si un projet sera rentable", "Comparer ce qu'il coûte et ce qu'il rapporte sur plusieurs années (VAN, TRI).", ["bornes"]],
     ["Mener une enquête", "Écrire un questionnaire, le diffuser et analyser les réponses.", ["commerce", "bornes"]]
   ]},
-  { group: "Les logiciels que j'utilise", n: "ii.", items: [
+  { group: "Les logiciels que j'utilise", n: "2", items: [
     ["R", "Un logiciel pour faire des statistiques et des graphiques.", ["aeration"]],
     ["Python", "Un langage de programmation pour trier, compter et automatiser.", ["netflix", "laliga"]],
     ["Stata", "Un logiciel de statistiques très utilisé en économie.", ["commerce"]],
     ["SQL (MySQL)", "Le langage pour ranger et retrouver des informations dans une base de données.", ["gamezone"]]
   ]},
-  { group: "Récupérer et présenter les données", n: "iii.", items: [
+  { group: "Récupérer et présenter les données", n: "3", items: [
     ["Web scraping", "Faire lire un site internet par un programme pour récupérer ses informations automatiquement.", ["laliga"]],
     ["Présenter une analyse pas à pas", "Mélanger code, graphiques et explications dans un même document (Jupyter).", ["netflix"]],
     ["Créer un site web", "Construire des pages et un site qui enregistre des réservations (HTML, CSS, PHP).", ["gamezone", "laliga"]],
